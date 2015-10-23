@@ -18,10 +18,10 @@ class BooksController < ApplicationController
 	end
 
   def checkIn
-    
   end
 
   def checkOut
+    @user = User.where(:user_id, params[:user_id])
   end
 
 	def create

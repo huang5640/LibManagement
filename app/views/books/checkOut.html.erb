@@ -1,1 +1,36 @@
 <h1>Check Out</h1>
+<form>
+  <legend>用户</legend>
+  <div>
+    <input type='text' class='form-control' value='<%= params[:keyword] %>' name='user_id' placeholder='请输入用户码' >
+</form>
+
+<% if @user != nil%>
+<p>
+  <strong>Name:</strong>
+  <%= @user.name %>
+</p>
+
+<p>
+  <strong>Govid:</strong>
+  <%= @user.GovID %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @user.address %>
+</p>
+
+<p>
+  <strong>Authnum:</strong>
+  <%= @user.AuthNum %>
+</p>
+
+<p>
+  <strong>Books:</strong>
+  <%= @user.books.each do |book| %>
+  	<%= link_to book.title, book_path(book) %>
+  <% end %>  
+</p>
+<% end %>
+

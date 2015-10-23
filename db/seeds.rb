@@ -12,7 +12,8 @@ User.destroy_all
 User.create!([
 	{ name: "Jax", GovID: "401213789123", address: "1075 Space Park Way, Mountain View, CA", AuthNum: 3},
 	{ name: "Baby", GovID: "412378124891", address: "973 Dolors Ave, Los Altos, CA", AuthNum: 2},
-	{ name: "Vincent", GovID: 1238973928111", address: "white house, WA", AuthNum: 5}])
+	{ name: "Vincent", GovID: "1238973928111", address: "white house, WA", AuthNum: 5}])
+
 p "Created #{User.count} users"
 
 Book.create!([
