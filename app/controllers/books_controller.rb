@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-  before_action :set_book, only: [:show, :edit, :update, :destroy, :checkIn]
+  before_action :set_book, only: [:show, :edit, :update, :destroy, :checkIn, :checkOut]
 
 	def index 
 		@books = Book.all
@@ -19,6 +19,9 @@ class BooksController < ApplicationController
 
   def checkIn
     
+  end
+
+  def checkOut
   end
 
 	def create
