@@ -8,6 +8,8 @@ class BooksController < ApplicationController
       @books = Book.search(params[:keyword])
     elsif params[:isbn]
       @books = Book.search_by_isbn(params[:isbn])
+    else
+      @books = Book.all
     end
 	end
 
