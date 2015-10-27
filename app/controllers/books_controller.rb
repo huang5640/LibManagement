@@ -26,13 +26,16 @@ class BooksController < ApplicationController
     redirect_to books_path
   end
 
-  #def checkOut
-  #  @user = User.where(:YiBoID, params[:YiBoID])
-  #  p params[:YiBoID]
-  #end
-
   def checkingOut
+    @book.update(:user_id => @user.id)
+    flash[:notice] = "图书已经借出"
+    redirect_to books_path
   end
+
+  def checkOut
+  end
+
+
 
 	def create
     @book = Book.new(book_params)

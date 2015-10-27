@@ -35,7 +35,7 @@
 
 <div>
 	<% p "Checking out" %>
-	<p><%= link_to "确认借阅", checking_out_path, action: :checkingOut, method: :put,data: {confirm: "#{@user.name}将会借走#{@book.title}"} %></p>
+	<p><%= link_to "确认借阅", checking_out_path({id: params[:id], YiBoID: params[:YiBoID]}), data: {confirm: "#{@user.name}将会借走#{@book.title}"} %></p>
 </div>
 
 <% end %>
