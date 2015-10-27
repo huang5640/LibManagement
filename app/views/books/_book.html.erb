@@ -26,11 +26,12 @@
                                 else check_out_path(book)
                                 end %> </td>
         <td><%= if book.user
-                  p "已借出"
+                  "已借出"
                 else
-                  p "在馆"
+                  "在馆"
                 end%>
         </td>
+        <td><%= link_to "删除", book, method: :delete, data: {confirm: "确认要删除#{book.title}吗？"}%></td>
       </tr>
     <% end %>
   </tbody>

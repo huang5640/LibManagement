@@ -24,10 +24,12 @@
   <%= @book.ISBN %>
 </p>
 
+<% if @user %>
 <p>
   <strong>Owner:</strong>
   <%= link_to @user.name, @user%>
 </p>
+<% end %>
 
 <%= link_to 'Edit', edit_book_path(@book) %> |
 <%= link_to 'Back', books_path %>

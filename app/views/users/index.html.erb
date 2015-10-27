@@ -5,10 +5,11 @@
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Govid</th>
-      <th>Address</th>
-      <th>Authnum</th>
+      <th>益博ID</th>
+      <th>名字</th>
+      <th>身份证号</th>
+      <th>住址</th>
+      <th>借阅权限</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,6 +17,7 @@
   <tbody>
     <% @users.each do |user| %>
       <tr>
+        <td><%= user.YiBoID%></td>
         <td><%= user.name %></td>
         <td><%= user.GovID %></td>
         <td><%= user.address %></td>

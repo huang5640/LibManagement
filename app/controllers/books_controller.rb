@@ -1,6 +1,7 @@
 class BooksController < ApplicationController
-  before_action :set_book, only: [:show, :edit, :update, :destroy, :checkIn, :checkOut]
-
+  before_action :set_book, only: [:show, :edit, :update, :destroy, :destroy, :checkIn, :checkOut]
+  helper :all
+  
 	def index 
 		@books = Book.all
 	end
@@ -18,10 +19,12 @@ class BooksController < ApplicationController
 	end
 
   def checkIn
+
   end
 
   def checkOut
-    @user = User.where(:user_id, params[:user_id])
+    @user = User.where(:YiBoID, params[:YiBoID])
+    p params[:YiBoID]
   end
 
 	def create
@@ -49,6 +52,14 @@ class BooksController < ApplicationController
       end
     end
     end
+
+  def destroy
+    @book.destroy
+    respond_to do |format|
+      format.html { redirect_to books_url, notice: 'Book was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
