@@ -4,7 +4,11 @@ class BooksController < ApplicationController
   helper :all
 
 	def index 
-		@books = Book.all
+		if params[:keyword]
+      @books = Book.search(params[:keyword])
+    elsif params[:isbn]
+      @books = Book.search_by_isbn(params[:isbn])
+    end
 	end
 
 	def new
