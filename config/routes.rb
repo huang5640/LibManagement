@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get "books/:id/checkIn" => "books#checkIn", as: 'check_in'
   get "books/:id/checkOut" => "books#checkOut", as: 'check_out'
   get "books/:id/checkOut/:YiBoID" => "books#checkingOut", as: 'checking_out'
+  get "books/new/register/:isbn" => "books#registerBook", as: 'registering_book'
 
   root "books#index"
   # The priority is based upon order of creation: first created -> highest priority.
