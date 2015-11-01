@@ -22,15 +22,15 @@
         <td><%= book.description %></td>
         <td><%= book.ISBN %></td>
         <td><%= link_to "编辑", edit_book_path(book) %></td>
-        <td><%= link_to "借还", if book.user check_in_path(book)
-                                else check_out_path(book)
-                                end %> </td>
-        <td><%= if book.user
-                  "已借出"
-                else
-                  "在馆"
-                end%>
-        </td>
+
+        <% if book.user%>
+          <td><%= link_to "借还", check_in_path(book)%></td>
+          <td>已借出</td>
+        <% else %>
+          <td><%= link_to "借还", check_out_path(book)%></td>
+          <td>在馆</td>
+        <% end %>
+
         <td><%= link_to "删除", book, method: :delete, data: {confirm: "确认要删除#{book.title}吗？"}%></td>
       </tr>
     <% end %>

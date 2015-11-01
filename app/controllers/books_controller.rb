@@ -1,14 +1,21 @@
 class BooksController < ApplicationController
-  before_action :set_book, only: [:show, :edit, :update, :destroy, :destroy, :checkIn, :checkOut]
+  before_action :set_book, only: [:show, :edit, :update, :destroy, :destroy, :checkIn, :checkOut, :checkingOut]
+  before_action :set_user, only: [:checkOut, :checkingOut]
+  before_action :set_new_book, only: [:new, :registerBook]
   helper :all
-  
+
 	def index 
-		@books = Book.all
+		if params[:keyword]
+      @books = Book.search(params[:keyword])
+    elsif params[:isbn]
+      @books = Book.search_by_isbn(params[:isbn])
+    else
+      @books = Book.all
+    end
 	end
 
 	def new
-		@book = Book.new
-	end
+  end
 
 	def show
     @user = @book.user 
@@ -19,12 +26,25 @@ class BooksController < ApplicationController
 	end
 
   def checkIn
+    @book.update(:user_id => nil)
 
+    flash[:notice] = "图书已经归库"
+    redirect_to books_path
+  end
+
+  def checkingOut
+    @book.update(:user_id => @user.id)
+    flash[:notice] = "图书已经借出"
+    redirect_to books_path
   end
 
   def checkOut
-    @user = User.where(:YiBoID, params[:YiBoID])
-    p params[:YiBoID]
+  end
+
+  def registerBook
+    @brandNewBook = Book.create({title: @newBook["title"], author: @newBook["author"], description: @newBook["summary"], ISBN: @newBook["isbn13"], image: @newBook["image"]})
+    flash[:notice] = "#{@newBook["title"]}已经入库。"
+    redirect_to books_path
   end
 
 	def create
@@ -65,6 +85,14 @@ class BooksController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_book
       @book = Book.find(params[:id])
+    end
+
+    def set_user
+      @user = User.find_by(YiBoID: params[:YiBoID])
+    end
+
+    def set_new_book
+      @newBook = Book.search_douban_by_isbn(params[:isbn])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

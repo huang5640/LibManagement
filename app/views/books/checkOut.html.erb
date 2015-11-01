@@ -6,9 +6,7 @@
   </div>
 </form>
 
-<% user = User.find_by YiBoID: params[:YiBoID] %>
-
-<% if user %>
+<% if @user %>
 
   <table>
   <thead>
@@ -25,22 +23,19 @@
 
   <tbody>
       <tr>
-        <td><%= user.YiBoID%></td>
-        <td><%= user.name %></td>
-        <td><%= user.GovID %></td>
-        <td><%= user.address %></td>
-        <td><%= user.books if user.books.count > 0%></td>
-        <td><%= user.AuthNum - user.books.count%></td>
+        <td><%= @user.YiBoID%></td>
+        <td><%= @user.name %></td>
+        <td><%= @user.GovID %></td>
+        <td><%= @user.address %></td>
+        <td><%= @user.books.count%></td>
+        <td><%= @user.AuthNum - @user.books.count%></td>
       </tr>
   </tbody>
 </table>
 
 <div>
 	<% p "Checking out" %>
-	<p><%= link_to "确认借阅", books_path, action: :checkOut,data: {confirm: "#{user.name}将会借走#{@book.title}"} %></p>
-	<%# Book.checkOut(user, @book) %>
-	<%# p "Checked out" %>
-
+	<p><%= link_to "确认借阅", checking_out_path({id: params[:id], YiBoID: params[:YiBoID]}), data: {confirm: "#{@user.name}将会借走#{@book.title}"} %></p>
 </div>
 
 <% end %>
